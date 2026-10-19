@@ -1,0 +1,13 @@
+{
+  "android": {
+    "versionCode": 10,
+    "versionName": "1.9.1",
+    "url": "https://github.com/NearConnect/nearconnect.github.io/releases/download/v1.9.1/NearConnect.apk"
+  },
+  "windows": {
+    "version": "1.9.1",
+    "url": "https://github.com/NearConnect/nearconnect.github.io/releases/download/v1.9.1/NearConnect-Setup.msi"
+  },
+  "page": "https://nearconnect.github.io/",
+  "notes": "Der finale Name: NearConnect!\n\n- 2Flow bzw. 2Near heißt ab jetzt NearConnect – deine gekoppelten Geräte und Einstellungen bleiben erhalten\n- Empfangene Dateien landen in Downloads/NearConnect bzw. im Album NearConnect\n"
+}
