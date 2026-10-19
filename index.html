@@ -56,6 +56,15 @@
     .dl.soon { background: var(--surface-2); box-shadow: none; }
     .dl.soon .btn { background: transparent; color: var(--muted); border: 1px dashed var(--line); cursor: default; }
     .dl.recommended { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary), var(--shadow); }
+    .trust { display: flex; gap: 16px; align-items: flex-start; margin: 22px 0 8px; padding: 18px 20px; border-radius: 18px;
+      background: var(--surface); border: 1px solid var(--line); }
+    .trust-icon { flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--surface-2); color: var(--ok); }
+    .trust b { font-size: 16px; }
+    .trust p { margin: 6px 0 8px; color: var(--muted); font-size: 15px; }
+    .trust ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; }
+    .trust li { margin: 4px 0; }
+    .trust li b { color: var(--text); font-size: 15px; }
     .dl .rec { display: none; align-self: flex-start; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;
       background: var(--primary); color: var(--on-primary); }
     .dl.recommended .rec { display: inline-block; }
@@ -135,6 +144,21 @@
     </div>
     <p class="hint" id="apple-hint" hidden>Für iPhone und iPad gibt es NearConnect noch nicht. Öffne diese Seite auf deinem Android-Handy oder Windows-PC.</p>
     <p class="hint">Updates bekommst du automatisch angezeigt – einfach über die alte Version installieren.</p>
+
+    <div class="trust">
+      <div class="trust-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <div>
+        <b>Warum warnt mein Handy oder PC bei der Installation?</b>
+        <p>Android und Windows zeigen diese Hinweise bei <i>jeder</i> App, die nicht aus einem offiziellen Store kommt – das sagt nichts darüber aus, ob eine App gefährlich ist. NearConnect ist eine Testversion und deshalb noch nicht im Store.</p>
+        <ul>
+          <li>Deine Inhalte gehen nur direkt von Gerät zu Gerät in deinem WLAN – nie über einen Server.</li>
+          <li>Kein Konto, keine Werbung, keine Analytics. Die einzige Internet-Anfrage ist die optionale Update-Suche auf dieser Seite.</li>
+          <li><b>Bald im Google Play Store und im Microsoft Store</b> – dann ganz ohne Warnungen und mit automatischen Updates.</li>
+        </ul>
+      </div>
+    </div>
 
     <section>
       <h2>So funktioniert's</h2>
