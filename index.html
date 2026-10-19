@@ -95,11 +95,59 @@
     details ol { margin: 0 0 16px; padding-left: 20px; color: var(--text); }
     details li { margin: 6px 0; }
     .muted { color: var(--muted); }
-    .matrix { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; font-size: 15px; }
-    .matrix th, .matrix td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); }
-    .matrix tr:last-child td { border-bottom: 0; }
-    .matrix th { background: var(--surface-2); font-size: 13px; color: var(--muted); font-weight: 650; }
-    .yes { color: var(--ok); font-weight: 650; }
+    /* hero demo: copy on the PC, it shows up on the phone – and a photo back */
+    .demo { max-width: 600px; margin: 30px auto 0; }
+    .demo svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .demo .dev { fill: #17171e; stroke: var(--line); stroke-width: 1.5; }
+    .demo .scr { fill: var(--surface); }
+    .demo .bar2 { fill: var(--surface-2); }
+    .demo .bar { fill: var(--line); }
+    .demo .stand { fill: #2a2a33; }
+    .demo text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: var(--text); }
+    .demo text.m { fill: var(--muted); }
+    .demo text.w { fill: #fff; }
+    .demo .card { fill: var(--surface); stroke: var(--line); filter: drop-shadow(0 6px 14px rgba(20, 16, 60, .18)); }
+    .demo .sel { fill: var(--primary); fill-opacity: .22; }
+    .demo .trail { fill: none; stroke: var(--primary); stroke-width: 2.5; stroke-linecap: round; opacity: 0; }
+    .demo .ring { fill: none; stroke: var(--primary); stroke-width: 2.5; opacity: 0; }
+    .demo .anim { opacity: 0; }
+
+    /* which devices fit together */
+    .req { display: flex; gap: 12px; align-items: center; margin: 0 0 16px; padding: 12px 16px; border-radius: 14px;
+      background: var(--surface-2); border: 1px solid var(--line); font-size: 15px; }
+    .req svg { flex: none; color: var(--primary); }
+    .net { margin: 0 0 14px; padding: 4px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); }
+    .net svg { display: block; width: 100%; height: auto; }
+    .net .wlan { fill: var(--primary); fill-opacity: .05; stroke: var(--primary); stroke-opacity: .45; stroke-width: 2; stroke-dasharray: 8 8; animation: netflow 6s linear infinite; }
+    .net .wlan-tag rect { fill: var(--surface-2); stroke: var(--primary); stroke-opacity: .4; }
+    .net .wlan-tag text, .net .soon-tag text { font: 700 15px system-ui, sans-serif; text-anchor: middle; fill: var(--text); }
+    .net .links path { stroke: var(--line); stroke-width: 3; fill: none; }
+    .net .flows use { stroke: var(--primary); stroke-opacity: .45; stroke-width: 3; fill: none; stroke-dasharray: 2 14; stroke-linecap: round; animation: netflow 1.4s linear infinite; }
+    .net .pk { filter: drop-shadow(0 3px 8px rgba(79, 70, 229, .45)); }
+    .net .node .disc { fill: var(--surface-2); stroke: var(--line); stroke-width: 2; transition: stroke .3s; }
+    .net .node.hot .disc { stroke: var(--primary); }
+    .net .node .halo { fill: none; stroke: var(--primary); stroke-width: 2.5; opacity: 0; }
+    .net .node .ico { fill: none; stroke: var(--text); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+    .net .node text { font: 650 19px system-ui, sans-serif; text-anchor: middle; fill: var(--text); }
+    .net .soon { opacity: .4; }
+    .net .soon-link { stroke: var(--muted); stroke-opacity: .5; stroke-width: 2; stroke-dasharray: 3 7; fill: none; }
+    .net .soon-tag rect { fill: var(--surface-2); stroke: var(--line); }
+    .pairs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .pairs span { padding: 7px 13px; border-radius: 999px; font-size: 14px; font-weight: 650; border: 1px solid var(--line); background: var(--surface); }
+    .pairs .ok-pill { color: var(--ok); }
+    .pairs .soon-pill { color: var(--muted); }
+
+    /* small motion everywhere else */
+    .logo svg path { animation: nudge 3.2s ease-in-out infinite; }
+    .logo svg path + path { animation-direction: reverse; }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .2, 1); }
+    .reveal.in { opacity: 1; transform: none; }
+    @keyframes netflow { to { stroke-dashoffset: -32; } }
+    @keyframes nudge { 0%, 100% { transform: translateX(-1.5px); } 50% { transform: translateX(1.5px); } }
+    @media (prefers-reduced-motion: reduce) {
+      .logo svg path { animation: none; }
+    }
+
     .features { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
     .feature { display: flex; gap: 12px; align-items: flex-start; }
     .feature .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; margin-top: 8px; background: var(--primary); }
@@ -121,6 +169,87 @@
       <h1>Kopieren. Drüben einfügen.</h1>
       <p class="lead">NearConnect bringt Text, Bilder und Dateien in Sekunden zwischen Handy und PC – direkt über dein WLAN, verschlüsselt, ohne Cloud und ohne Konto.</p>
       <span class="badge">Testversion · für Freunde &amp; Familie</span>
+      <figure class="demo">
+        <svg id="demo" viewBox="0 0 540 290" role="img" aria-label="Animation: Am PC kopierter Text ist sofort auf dem Handy, ein Foto vom Handy landet direkt am PC.">
+          <defs>
+            <linearGradient id="ncGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#818cf8"/><stop offset=".65" stop-color="#f0abfc"/><stop offset="1" stop-color="#fcd5b5"/></linearGradient>
+            <symbol id="pic" viewBox="0 0 100 130" preserveAspectRatio="xMidYMid slice">
+              <rect width="100" height="130" fill="url(#sky)"/><circle cx="70" cy="40" r="11" fill="#fff7d6"/>
+              <path d="M0 104L28 66 48 90 68 70 100 106V130H0Z" fill="#4338ca" fill-opacity=".8"/><path d="M0 130V114L38 94 70 118 100 108V130Z" fill="#312e81"/>
+            </symbol>
+            <clipPath id="phoneScr"><rect x="399" y="13" width="126" height="264" rx="18"/></clipPath>
+          </defs>
+          <!-- PC -->
+          <rect class="dev" x="8" y="14" width="326" height="206" rx="14"/>
+          <rect class="scr" x="18" y="24" width="306" height="186" rx="7"/>
+          <path class="bar2" d="M18 46V31a7 7 0 0 1 7-7h292a7 7 0 0 1 7 7v15Z"/>
+          <circle class="bar" cx="32" cy="35" r="3.5"/><circle class="bar" cx="44" cy="35" r="3.5"/><circle class="bar" cx="56" cy="35" r="3.5"/>
+          <rect class="bar" x="36" y="62" width="170" height="9" rx="4.5"/>
+          <rect id="dSel" class="sel" x="32" y="82" width="0" height="28" rx="5"/>
+          <text x="38" y="102" font-size="19" font-weight="700">Café Mira, 19 Uhr</text>
+          <rect class="bar" x="36" y="126" width="250" height="9" rx="4.5"/><rect class="bar" x="36" y="144" width="210" height="9" rx="4.5"/>
+          <rect class="bar" x="36" y="162" width="120" height="9" rx="4.5"/><rect class="bar" x="36" y="180" width="180" height="9" rx="4.5"/>
+          <rect class="stand" x="156" y="220" width="30" height="28"/><rect class="stand" x="118" y="246" width="106" height="9" rx="4.5"/>
+          <g id="dToast" class="anim">
+            <rect class="card" x="150" y="150" width="166" height="52" rx="9"/>
+            <use href="#pic" x="158" y="157" width="30" height="38"/>
+            <text x="196" y="174" font-size="13" font-weight="700">Foto empfangen</text>
+            <text class="m" x="196" y="191" font-size="11">Strg + V zum Einfügen</text>
+          </g>
+          <g id="dKeys" class="anim">
+            <rect x="210" y="176" width="110" height="36" rx="9" fill="var(--surface)" stroke="var(--primary)" stroke-width="2"/>
+            <text x="265" y="200" font-size="16" font-weight="800" text-anchor="middle" style="fill:var(--primary)">Strg + C</text>
+          </g>
+          <!-- phone -->
+          <rect class="dev" x="392" y="6" width="140" height="278" rx="24"/>
+          <g clip-path="url(#phoneScr)">
+            <rect class="scr" x="399" y="13" width="126" height="264"/>
+            <rect class="bar2" x="399" y="13" width="126" height="38"/>
+            <circle cx="417" cy="34" r="9" fill="#c4b5fd"/>
+            <text x="432" y="38" font-size="12" font-weight="700">Lena</text>
+            <rect class="bar2" x="407" y="62" width="106" height="24" rx="10"/>
+            <text x="414" y="78" font-size="10">Wo treffen wir uns?</text>
+            <g id="dSent" class="anim">
+              <rect x="413" y="96" width="104" height="24" rx="10" fill="url(#ncGrad)"/>
+              <text class="w" x="465" y="112" font-size="10.5" font-weight="600" text-anchor="middle">Café Mira, 19 Uhr</text>
+            </g>
+            <rect class="bar2" x="405" y="245" width="114" height="24" rx="12"/>
+            <text id="dInput" class="m" x="415" y="261" font-size="10.5">Nachricht</text>
+            <g id="dPaste" class="anim">
+              <rect x="420" y="212" width="70" height="26" rx="8" fill="#2a2a33"/>
+              <text class="w" x="455" y="229" font-size="11" font-weight="600" text-anchor="middle">Einfügen</text>
+            </g>
+            <g id="dNotif" class="anim">
+              <rect class="card" x="405" y="20" width="114" height="40" rx="10"/>
+              <circle cx="420" cy="40" r="8" fill="url(#ncGrad)"/>
+              <path d="M416 38h7M421 36l2 2-2 2M424 42h-7M419 40l-2 2 2 2" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="433" y="36" font-size="9" font-weight="700">NearConnect</text>
+              <text class="m" x="433" y="50" font-size="9.5">Vom PC kopiert ✓</text>
+            </g>
+            <g id="dGallery" class="anim">
+              <use href="#pic" x="399" y="13" width="126" height="264"/>
+              <g id="dBubble">
+                <circle cx="508" cy="150" r="15" fill="url(#ncGrad)" stroke="#fff" stroke-width="2"/>
+                <path d="M501 147h11M509 144l3 3-3 3M515 153h-11M507 150l-3 3 3 3" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <circle id="dTap" class="ring" cx="508" cy="150" r="14" style="stroke:#fff"/>
+            </g>
+          </g>
+          <circle id="dRing" class="ring" cx="462" cy="140" r="8"/>
+          <!-- what travels -->
+          <path id="dTrail" class="trail" d="M120 96Q300-40 462 140"/>
+          <path id="dTrail2" class="trail" d="M462 150Q330-20 173 176"/>
+          <g id="dChip" class="anim">
+            <rect x="-72" y="-15" width="144" height="30" rx="15" fill="url(#ncGrad)"/>
+            <text class="w" y="5" font-size="13" font-weight="700" text-anchor="middle">Café Mira, 19 Uhr</text>
+          </g>
+          <g id="dPhoto" class="anim">
+            <use href="#pic" x="-22" y="-28" width="44" height="56"/>
+            <rect x="-22" y="-28" width="44" height="56" rx="3" fill="none" stroke="#fff" stroke-width="3"/>
+          </g>
+        </svg>
+      </figure>
     </header>
 
     <div class="downloads">
@@ -161,24 +290,82 @@
     </div>
 
     <section>
+      <h2>Welche Geräte passen zusammen?</h2>
+      <p class="req">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M2 8.8a15 15 0 0 1 20 0M5 12.6a10 10 0 0 1 14 0M8.5 16.3a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+        <span><b>Einzige Voraussetzung:</b> alle Geräte im selben WLAN. Gäste-WLANs blockieren Verbindungen zwischen Geräten oft.</span>
+      </p>
+      <figure class="net">
+        <svg id="net" viewBox="0 0 640 350" role="img" aria-label="Android-Handys, Tablets, Windows-PCs und Laptops im selben WLAN schicken sich direkt Text, Bilder und Dateien. iPhone, iPad und Mac folgen.">
+          <defs>
+            <g id="pkText"><rect x="-18" y="-13" width="36" height="26" rx="8" fill="url(#ncGrad)"/><text y="4.5" text-anchor="middle" font-size="12" font-weight="800" fill="#fff" font-family="system-ui, sans-serif">Aa</text></g>
+            <g id="pkImg"><rect x="-18" y="-13" width="36" height="26" rx="8" fill="url(#ncGrad)"/><path d="M-10 7L-3-2 1 3 5-2 10 7Z" fill="#fff"/><circle cx="-5" cy="-6" r="2.5" fill="#fff"/></g>
+            <g id="pkFile"><rect x="-18" y="-13" width="36" height="26" rx="8" fill="url(#ncGrad)"/><path d="M-6-8h7l5 5v11H-6Z M1-8v5h5" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></g>
+          </defs>
+          <!-- the home network -->
+          <rect class="wlan" x="16" y="34" width="452" height="300" rx="40"/>
+          <g class="wlan-tag"><rect x="36" y="18" width="128" height="32" rx="16"/><text x="100" y="40">Dein WLAN</text></g>
+          <!-- connections between every pair -->
+          <g class="links">
+            <path id="l1" d="M110 120L360 120"/><path id="l2" d="M110 255L360 255"/>
+            <path id="l3" d="M110 120L360 255"/><path id="l4" d="M110 255L360 120"/>
+            <path id="l5" d="M110 120L110 255"/><path id="l6" d="M360 120L360 255"/>
+          </g>
+          <g class="flows"><use href="#l1"/><use href="#l2"/><use href="#l3"/><use href="#l4"/><use href="#l5"/><use href="#l6"/></g>
+          <path class="soon-link" d="M468 120H526M468 255H526"/>
+          <!-- devices -->
+          <g class="node" transform="translate(110 120)">
+            <circle class="halo" r="40"/><circle class="disc" r="40"/>
+            <rect class="ico" x="-11" y="-19" width="22" height="38" rx="5"/><path class="ico" d="M-3 13h6"/>
+            <text y="70">Android-Handy</text>
+          </g>
+          <g class="node" transform="translate(110 255)">
+            <circle class="halo" r="40"/><circle class="disc" r="40"/>
+            <rect class="ico" x="-17" y="-14" width="34" height="28" rx="5"/>
+            <text y="70">Tablet</text>
+          </g>
+          <g class="node" transform="translate(360 120)">
+            <circle class="halo" r="40"/><circle class="disc" r="40"/>
+            <rect class="ico" x="-20" y="-16" width="40" height="26" rx="4"/><path class="ico" d="M-8 18h16M0 10v8"/>
+            <text y="70">Windows-PC</text>
+          </g>
+          <g class="node" transform="translate(360 255)">
+            <circle class="halo" r="40"/><circle class="disc" r="40"/>
+            <rect class="ico" x="-16" y="-14" width="32" height="22" rx="3"/><path class="ico" d="M-22 13h44"/>
+            <text y="70">Laptop</text>
+          </g>
+          <!-- data on its way, drawn by the script -->
+          <g id="pk" class="pk"></g>
+          <!-- coming later -->
+          <g class="node soon" transform="translate(560 120)">
+            <circle class="disc" r="34"/>
+            <rect class="ico" x="-9" y="-16" width="18" height="32" rx="5"/>
+            <text y="60">iPhone, iPad</text>
+          </g>
+          <g class="node soon" transform="translate(560 255)">
+            <circle class="disc" r="34"/>
+            <rect class="ico" x="-15" y="-12" width="30" height="20" rx="3"/><path class="ico" d="M-6 14h12M0 8v6"/>
+            <text y="60">Mac</text>
+          </g>
+          <g class="soon-tag"><rect x="522" y="40" width="76" height="28" rx="14"/><text x="560" y="59">bald</text></g>
+        </svg>
+      </figure>
+      <div class="pairs">
+        <span class="ok-pill">✓ Handy ↔ PC</span>
+        <span class="ok-pill">✓ Handy ↔ Handy &amp; Tablet</span>
+        <span class="ok-pill">✓ PC ↔ PC</span>
+        <span class="soon-pill">iPhone, iPad &amp; Mac in Arbeit</span>
+      </div>
+      <p class="muted">Alle Android-Geräte ab Android 8 – Samsung, Pixel, Xiaomi, OnePlus und Co. – und Windows 10 und 11. Beliebig viele Geräte, jedes wird einmal gekoppelt.</p>
+    </section>
+
+    <section>
       <h2>So funktioniert's</h2>
       <div class="steps">
         <div class="step"><h3>Auf beiden Geräten installieren</h3><p>Handy und PC – beide im selben WLAN.</p></div>
         <div class="step"><h3>Einmal koppeln</h3><p>Die Geräte finden sich von selbst. Beide zeigen denselben Code – bestätigen, fertig.</p></div>
         <div class="step"><h3>Kopieren &amp; einfügen</h3><p>Am PC <kbd>Strg</kbd>+<kbd>C</kbd> – schon auf dem Handy. Am Handy die NearConnect-Blase antippen – schon am PC.</p></div>
       </div>
-    </section>
-
-    <section>
-      <h2>Welche Geräte passen zusammen?</h2>
-      <table class="matrix">
-        <tr><th>Verbindung</th><th>Status</th></tr>
-        <tr><td>Handy ↔ PC (Android ↔ Windows)</td><td class="yes">✓ funktioniert</td></tr>
-        <tr><td>Handy ↔ Handy, Tablet (Android ↔ Android)</td><td class="yes">✓ funktioniert</td></tr>
-        <tr><td>PC ↔ PC (Windows ↔ Windows)</td><td class="yes">✓ funktioniert</td></tr>
-        <tr><td>iPhone, iPad, Mac</td><td class="muted">in Arbeit</td></tr>
-      </table>
-      <p class="muted">Alle Android-Geräte ab Android 8 – Samsung, Pixel, Xiaomi, OnePlus und Co. Beliebig viele Geräte, jedes wird einmal gekoppelt. Einzige Voraussetzung: alle im selben WLAN (Gäste-WLANs blockieren Verbindungen zwischen Geräten oft).</p>
     </section>
 
     <section>
@@ -234,6 +421,123 @@
   </div>
   <footer>NearConnect ist ein privates Testprojekt. Fragen oder Fehler? Sag einfach dem Menschen Bescheid, der dir diesen Link geschickt hat.</footer>
 
+  <script>
+    // Animations: the copy/paste demo at the top, data travelling through the device network, fade-in on scroll.
+    // Everything runs only while visible and stays still for people who prefer reduced motion.
+    (function () {
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function $(id) { return document.getElementById(id); }
+      function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+      function seg(t, a, b) { return clamp((t - a) / (b - a)); }
+      function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+      function pop(x) { return 1 + 2.7 * Math.pow(x - 1, 3) + 1.7 * Math.pow(x - 1, 2); }
+      function op(el, v) { el.style.opacity = v; }
+      function tf(el, v) { el.setAttribute("transform", v); }
+      function around(cx, cy, s) { return "translate(" + cx + " " + cy + ") scale(" + s + ") translate(" + -cx + " " + -cy + ")"; }
+      function bez(a, c, b, p) { var q = 1 - p; return [q * q * a[0] + 2 * q * p * c[0] + p * p * b[0], q * q * a[1] + 2 * q * p * c[1] + p * p * b[1]]; }
+
+      // --- demo: copy on the PC → on the phone, then a photo from the phone → on the PC (10 s loop)
+      var d = {}, DEMO = 10;
+      ["dSel", "dKeys", "dChip", "dTrail", "dTrail2", "dRing", "dNotif", "dPaste", "dInput", "dSent", "dGallery", "dBubble", "dTap", "dPhoto", "dToast"]
+        .forEach(function (id) { d[id] = $(id); });
+      var len1 = d.dTrail.getTotalLength(), len2 = d.dTrail2.getTotalLength();
+      d.dTrail.style.strokeDasharray = len1; d.dTrail2.style.strokeDasharray = len2;
+      function trail(el, len, p, vis) { el.style.strokeDashoffset = len * (1 - p); op(el, vis); }
+      function demo(t) {
+        d.dSel.setAttribute("width", 184 * ease(seg(t, .5, 1.2)) * (1 - seg(t, 4.4, 4.8)));
+        var k = seg(t, 1.2, 1.45);
+        op(d.dKeys, k * (1 - seg(t, 2.3, 2.6))); tf(d.dKeys, around(265, 194, .7 + .3 * pop(k)));
+        var p = ease(seg(t, 1.6, 2.5)), at = bez([120, 96], [300, -40], [462, 140], p);
+        op(d.dChip, t < 1.6 ? 0 : seg(t, 1.6, 1.72) * (1 - seg(t, 2.42, 2.6)));
+        tf(d.dChip, "translate(" + at[0] + " " + at[1] + ") scale(" + (1 - .3 * p) + ")");
+        trail(d.dTrail, len1, p, t < 1.6 ? 0 : .8 * (1 - seg(t, 2.4, 2.9)));
+        var r = seg(t, 2.45, 3.05);
+        d.dRing.setAttribute("r", 8 + 50 * r); op(d.dRing, r > 0 && r < 1 ? .6 * (1 - r) : 0);
+        var n = ease(seg(t, 2.55, 2.85)), no = ease(seg(t, 4, 4.3));
+        op(d.dNotif, n * (1 - no)); tf(d.dNotif, "translate(0 " + (-50 * (1 - n) - 50 * no) + ")");
+        var pp = seg(t, 2.95, 3.15);
+        op(d.dPaste, pp * (1 - seg(t, 3.3, 3.45))); tf(d.dPaste, around(455, 225, .8 + .2 * pop(pp)));
+        var pasted = t >= 3.35 && t < 3.95;
+        d.dInput.textContent = pasted ? "Café Mira, 19 Uhr" : "Nachricht";
+        d.dInput.setAttribute("class", pasted ? "" : "m");
+        var se = seg(t, 3.9, 4.15);
+        op(d.dSent, t < 5.2 ? se : 0); tf(d.dSent, "translate(0 " + 12 * (1 - ease(se)) + ")");
+        op(d.dGallery, seg(t, 4.7, 5.1) * (1 - seg(t, 9.4, 9.9)));
+        var b = seg(t, 5.4, 5.7);
+        op(d.dBubble, b); tf(d.dBubble, around(508, 150, (.4 + .6 * pop(b)) * (t > 6 && t < 6.18 ? .86 : 1)));
+        var tp = seg(t, 6, 6.5);
+        d.dTap.setAttribute("r", 14 + 26 * tp); op(d.dTap, tp > 0 && tp < 1 ? .8 * (1 - tp) : 0);
+        var p2 = ease(seg(t, 6.3, 7.2)), at2 = bez([462, 150], [330, -20], [173, 176], p2);
+        op(d.dPhoto, t < 6.3 ? 0 : seg(t, 6.3, 6.4) * (1 - seg(t, 7.12, 7.3)));
+        tf(d.dPhoto, "translate(" + at2[0] + " " + at2[1] + ") scale(" + (1.3 - .6 * p2) + ") rotate(" + (-10 + 10 * p2) + ")");
+        trail(d.dTrail2, len2, p2, t < 6.3 ? 0 : .8 * (1 - seg(t, 7.1, 7.6)));
+        var to = ease(seg(t, 7.1, 7.4));
+        op(d.dToast, to * (1 - seg(t, 9.1, 9.4))); tf(d.dToast, "translate(" + 24 * (1 - to) + " 0)");
+      }
+
+      // --- network: text, photos and files hopping between random devices; the receiver lights up
+      var NS = "http://www.w3.org/2000/svg", layer = $("pk"), nodes = document.querySelectorAll("#net .node:not(.soon)");
+      var pos = [[110, 120], [110, 255], [360, 120], [360, 255]], kinds = ["pkText", "pkImg", "pkFile"];
+      var packets = [], hit = [-9, -9, -9, -9], nextAt = 0;
+      function network(now) {
+        if (now >= nextAt && packets.length < 4) {
+          var from = Math.floor(Math.random() * 4), to = Math.floor(Math.random() * 3);
+          if (to >= from) to++;
+          var el = document.createElementNS(NS, "use");
+          el.setAttribute("href", "#" + kinds[Math.floor(Math.random() * 3)]);
+          layer.appendChild(el);
+          var dx = pos[to][0] - pos[from][0], dy = pos[to][1] - pos[from][1];
+          packets.push({ el: el, from: from, to: to, t0: now, dur: .5 + Math.sqrt(dx * dx + dy * dy) / 260 });
+          nextAt = now + .45 + Math.random() * .5;
+        }
+        packets = packets.filter(function (pk) {
+          var q = (now - pk.t0) / pk.dur;
+          if (q >= 1) { hit[pk.to] = now; layer.removeChild(pk.el); return false; }
+          var e = ease(q), a = pos[pk.from], b = pos[pk.to];
+          tf(pk.el, "translate(" + (a[0] + (b[0] - a[0]) * e) + " " + (a[1] + (b[1] - a[1]) * e) + ") scale(" + (1 + .35 * Math.sin(Math.PI * q)) + ")");
+          op(pk.el, Math.min(1, q * 5, (1 - q) * 5));
+          return true;
+        });
+        for (var i = 0; i < nodes.length; i++) {
+          var h = (now - hit[i]) / .8, halo = nodes[i].querySelector(".halo");
+          halo.setAttribute("r", 40 + 24 * clamp(h)); op(halo, h < 1 ? .7 * (1 - h) : 0);
+          nodes[i].classList.toggle("hot", h < .5);
+        }
+      }
+
+      // --- run only what is on screen. The demo and the network explain the app and move calmly, so they also play when the
+      // system asks for reduced motion (Windows does so whenever "animation effects" are off); only the decoration stops.
+      var demoSvg = $("demo"), netSvg = $("net"), seen = { demo: true, net: true }, running = false, t0 = performance.now();
+      function frame(ts) {
+        var s = (ts - t0) / 1000;
+        if (seen.demo) demo(s % DEMO);
+        if (seen.net) network(s);
+        if (seen.demo || seen.net) requestAnimationFrame(frame); else running = false;
+      }
+      function start() { if (!running) { running = true; requestAnimationFrame(frame); } }
+      if ("IntersectionObserver" in window) {
+        var onScreen = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { seen[e.target === demoSvg ? "demo" : "net"] = e.isIntersecting; });
+          start();
+        });
+        onScreen.observe(demoSvg); onScreen.observe(netSvg);
+      }
+      start();
+
+      // fade cards in as they scroll into view, siblings slightly staggered
+      if (reduce || !("IntersectionObserver" in window)) return;
+      var reveal = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); reveal.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -8% 0px" });
+      document.querySelectorAll(".dl, .trust, .req, .net, .pairs, .step, details, .feature, .privacy").forEach(function (el) {
+        var i = 0, sib = el;
+        while ((sib = sib.previousElementSibling) && i < 4) if (sib.classList.contains("reveal")) i++;
+        el.classList.add("reveal");
+        el.style.transitionDelay = i * 90 + "ms";
+        reveal.observe(el);
+      });
+    })();
+  </script>
   <script>
     // Highlight the right download for this device and show the current version numbers.
     (function () {
