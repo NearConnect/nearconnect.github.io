@@ -95,16 +95,6 @@
     details ol { margin: 0 0 16px; padding-left: 20px; color: var(--text); }
     details li { margin: 6px 0; }
     .muted { color: var(--muted); }
-    /* hero demo: text from the PC lands on the phone, a photo goes back */
-    .demo { max-width: 600px; margin: 30px auto 0; }
-    .demo svg { display: block; width: 100%; height: auto; overflow: visible; }
-    .demo .dev { fill: #17171e; stroke: var(--line); stroke-width: 1.5; }
-    .demo .scr { fill: var(--surface); }
-    .demo .stand { fill: #2a2a33; }
-    .demo text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: var(--text); }
-    .demo text.w { fill: #fff; }
-    .demo .anim { opacity: 0; }
-
     /* which devices fit together */
     .req { display: flex; gap: 12px; align-items: center; margin: 0 0 16px; padding: 12px 16px; border-radius: 14px;
       background: var(--surface-2); border: 1px solid var(--line); font-size: 15px; }
@@ -155,43 +145,6 @@
       <h1>Kopieren. Drüben einfügen.</h1>
       <p class="lead">NearConnect bringt Text, Bilder und Dateien in Sekunden zwischen Handy und PC – direkt über dein WLAN, verschlüsselt, ohne Cloud und ohne Konto.</p>
       <span class="badge">Testversion · für Freunde &amp; Familie</span>
-      <figure class="demo">
-        <svg id="demo" viewBox="0 0 540 290" role="img" aria-label="Animation: Text vom PC landet auf dem Handy, ein Foto vom Handy landet am PC.">
-          <defs>
-            <linearGradient id="ncGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#818cf8"/><stop offset=".65" stop-color="#f0abfc"/><stop offset="1" stop-color="#fcd5b5"/></linearGradient>
-            <symbol id="pic" viewBox="0 0 100 130" preserveAspectRatio="xMidYMid slice">
-              <rect width="100" height="130" fill="url(#sky)"/><circle cx="70" cy="40" r="11" fill="#fff7d6"/>
-              <path d="M0 104L28 66 48 90 68 70 100 106V130H0Z" fill="#4338ca" fill-opacity=".8"/><path d="M0 130V114L38 94 70 118 100 108V130Z" fill="#312e81"/>
-            </symbol>
-            <clipPath id="phoneScr"><rect x="399" y="13" width="126" height="264" rx="18"/></clipPath>
-            <clipPath id="pcScr"><rect x="18" y="24" width="306" height="186" rx="7"/></clipPath>
-          </defs>
-          <!-- PC -->
-          <rect class="dev" x="8" y="14" width="326" height="206" rx="14"/>
-          <rect class="scr" x="18" y="24" width="306" height="186" rx="7"/>
-          <text id="dPcText" x="171" y="124" font-size="22" font-weight="700" text-anchor="middle">Café Mira, 19 Uhr</text>
-          <g id="dPcPic" class="anim" clip-path="url(#pcScr)"><use href="#pic" x="18" y="24" width="306" height="186"/></g>
-          <rect class="stand" x="156" y="220" width="30" height="28"/><rect class="stand" x="118" y="246" width="106" height="9" rx="4.5"/>
-          <!-- phone -->
-          <rect class="dev" x="392" y="6" width="140" height="278" rx="24"/>
-          <rect class="scr" x="399" y="13" width="126" height="264" rx="18"/>
-          <g id="dPhoneText" class="anim">
-            <rect x="409" y="128" width="106" height="34" rx="12" fill="url(#ncGrad)"/>
-            <text class="w" x="462" y="150" font-size="11.5" font-weight="700" text-anchor="middle">Café Mira, 19 Uhr</text>
-          </g>
-          <g id="dPhonePic" class="anim" clip-path="url(#phoneScr)"><use href="#pic" x="399" y="13" width="126" height="264"/></g>
-          <!-- what travels -->
-          <g id="dChip" class="anim">
-            <rect x="-72" y="-15" width="144" height="30" rx="15" fill="url(#ncGrad)"/>
-            <text class="w" y="5" font-size="13" font-weight="700" text-anchor="middle">Café Mira, 19 Uhr</text>
-          </g>
-          <g id="dPhoto" class="anim">
-            <use href="#pic" x="-22" y="-28" width="44" height="56"/>
-            <rect x="-22" y="-28" width="44" height="56" rx="3" fill="none" stroke="#fff" stroke-width="3"/>
-          </g>
-        </svg>
-      </figure>
     </header>
 
     <div class="downloads">
@@ -240,6 +193,7 @@
       <figure class="net">
         <svg id="net" viewBox="0 0 560 300" role="img" aria-label="Android-Handy, Tablet, Windows-PC und Laptop im selben WLAN schicken sich direkt Text, Bilder und Dateien.">
           <defs>
+            <linearGradient id="ncGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f46e5"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
             <g id="pkDot"><circle r="9" fill="url(#ncGrad)"/></g>
           </defs>
           <g class="links"><path d="M90 80L280 150 90 220M470 80L280 150 470 220"/></g>
@@ -345,32 +299,14 @@
   <footer>NearConnect ist ein privates Testprojekt. Fragen oder Fehler? Sag einfach dem Menschen Bescheid, der dir diesen Link geschickt hat.</footer>
 
   <script>
-    // Animations: the copy/paste demo at the top, data travelling through the device network, fade-in on scroll.
+    // Animations: data travelling through the device network, fade-in on scroll.
     (function () {
       var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
       function $(id) { return document.getElementById(id); }
       function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
-      function seg(t, a, b) { return clamp((t - a) / (b - a)); }
       function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
       function op(el, v) { el.style.opacity = v; }
       function tf(el, v) { el.setAttribute("transform", v); }
-      function bez(a, c, b, p) { var q = 1 - p; return [q * q * a[0] + 2 * q * p * c[0] + p * p * b[0], q * q * a[1] + 2 * q * p * c[1] + p * p * b[1]]; }
-
-      // --- demo: text from the PC flies to the phone, then a photo flies back (10 s loop)
-      var d = {}, DEMO = 10;
-      ["dPcText", "dPcPic", "dPhoneText", "dPhonePic", "dChip", "dPhoto"].forEach(function (id) { d[id] = $(id); });
-      function demo(t) {
-        var p = ease(seg(t, 1, 2)), at = bez([171, 118], [320, -30], [462, 145], p);
-        op(d.dChip, t < 1 ? 0 : 1 - seg(t, 1.95, 2.1));
-        tf(d.dChip, "translate(" + at[0] + " " + at[1] + ") scale(" + (1 - .25 * p) + ")");
-        op(d.dPhoneText, seg(t, 1.95, 2.2) * (1 - seg(t, 4.3, 4.7)));
-        op(d.dPhonePic, seg(t, 4.8, 5.3) * (1 - seg(t, 9.3, 9.8)));
-        var p2 = ease(seg(t, 6, 7)), at2 = bez([462, 150], [320, -30], [171, 117], p2);
-        op(d.dPhoto, t < 6 ? 0 : 1 - seg(t, 6.95, 7.1));
-        tf(d.dPhoto, "translate(" + at2[0] + " " + at2[1] + ") scale(" + (1.3 + .4 * p2) + ")");
-        op(d.dPcPic, seg(t, 6.95, 7.3) * (1 - seg(t, 9.3, 9.8)));
-        op(d.dPcText, 1 - seg(t, 6.95, 7.3) * (1 - seg(t, 9.3, 9.8)));
-      }
 
       // --- network: dots travel from one device through the WLAN to another; the receiver lights up
       var NS = "http://www.w3.org/2000/svg", layer = $("pk"), nodes = document.querySelectorAll("#net .node");
@@ -401,22 +337,19 @@
         }
       }
 
-      // --- run only what is on screen. The demo and the network explain the app and move calmly, so they also play when the
-      // system asks for reduced motion (Windows does so whenever "animation effects" are off); only the decoration stops.
-      var demoSvg = $("demo"), netSvg = $("net"), seen = { demo: true, net: true }, running = false, t0 = performance.now();
+      // --- run only while on screen. The network explains the app and moves calmly, so it also plays when the system asks
+      // for reduced motion (Windows does so whenever "animation effects" are off); only the decoration stops.
+      var netSvg = $("net"), seen = true, running = false, t0 = performance.now();
       function frame(ts) {
-        var s = (ts - t0) / 1000;
-        if (seen.demo) demo(s % DEMO);
-        if (seen.net) network(s);
-        if (seen.demo || seen.net) requestAnimationFrame(frame); else running = false;
+        if (seen) { network((ts - t0) / 1000); requestAnimationFrame(frame); } else running = false;
       }
       function start() { if (!running) { running = true; requestAnimationFrame(frame); } }
       if ("IntersectionObserver" in window) {
         var onScreen = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { seen[e.target === demoSvg ? "demo" : "net"] = e.isIntersecting; });
+          entries.forEach(function (e) { seen = e.isIntersecting; });
           start();
         });
-        onScreen.observe(demoSvg); onScreen.observe(netSvg);
+        onScreen.observe(netSvg);
       }
       start();
 
